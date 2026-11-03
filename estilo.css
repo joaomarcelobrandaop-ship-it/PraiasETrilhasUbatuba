@@ -1,0 +1,308 @@
+/* Praias e Trilhas Ubatuba · direção "Convés da escuna"
+   Cores tiradas do passeio: mar fundo, água verde, colete salva-vidas, madeira do convés. */
+@font-face{font-family:"Big Shoulders";src:url(fontes/big-shoulders.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Figtree";src:url(fontes/figtree.woff2) format("woff2");font-weight:300 900;font-display:swap}
+
+:root{
+  --mar:#0B3B4A;          /* fundo principal */
+  --mar-fundo:#072A35;    /* rodapé, faixas mais escuras */
+  --mar-claro:#0F4A5B;    /* cartões sobre o mar */
+  --agua:#1FB5A3;         /* faixa verde-água */
+  --agua-clara:#6FDCCB;   /* verde-água para TEXTO sobre o mar (5,9:1) */
+  --colete:#FF6A1A;       /* botão de ação */
+  --madeira:#A0522D;      /* faixa do convés, tom mais quente (branco 5,6:1) */
+  --sol:#FFC233;          /* do sol do logo, só em detalhe */
+  --texto:#EAF4F2;        /* texto sobre o mar */
+  --texto-suave:#B5D3D0;
+  --tinta:#072A35;        /* texto sobre água e colete */
+  --casco:#FFFFFF;
+  --raio:18px;
+  --gutter:clamp(16px,4vw,40px);
+  --max:1180px;
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  --titulo:"Big Shoulders","Arial Narrow",Impact,sans-serif;
+  --corpo:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:84px}
+body{margin:0;background:var(--mar);color:var(--texto);font:400 1rem/1.6 var(--corpo);overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--titulo);font-weight:800;line-height:1.02;letter-spacing:.005em;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.6rem,7.5vw,5.2rem)}
+h2{font-size:clamp(2.1rem,5vw,3.4rem)}
+h3{font-size:clamp(1.55rem,3vw,2rem)}
+p{margin:0}
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
+.pular{position:absolute;left:-999px;top:8px;background:var(--colete);color:var(--tinta);padding:12px 16px;border-radius:10px;z-index:99;font-weight:700}
+.pular:focus{left:12px}
+:focus-visible{outline:3px solid var(--sol);outline-offset:3px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:999px;background:var(--colete);color:var(--tinta);font:700 1.05rem/1.2 var(--corpo);text-decoration:none;transition:transform .16s var(--ease-out),background-color .2s ease}
+.btn svg{width:22px;height:22px;flex:none}
+.btn:active{transform:scale(.97)}
+.btn--claro{background:var(--casco)}
+.btn--escuro{background:var(--mar-fundo);color:var(--texto)}
+@media (hover:hover) and (pointer:fine){.btn:hover{background:#FF8442}.btn--claro:hover{background:#DDF3EF}.btn--escuro:hover{background:#0A3644}}
+.link-seta{display:inline-flex;align-items:center;min-height:44px;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+
+/* ---------- cabeçalho ---------- */
+.topo{position:sticky;top:0;z-index:20;background:var(--mar-fundo)}
+.topo .wrap{display:flex;align-items:center;gap:16px;min-height:72px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.marca img{width:48px;height:48px;border-radius:12px}
+.marca span{font:800 1.3rem/1 var(--titulo);letter-spacing:.02em;text-transform:uppercase}
+.nav-larga{display:none;gap:4px}
+.nav-larga a{white-space:nowrap;display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;text-decoration:none;font-weight:600;color:var(--texto-suave)}
+.nav-larga a[aria-current]{color:var(--texto);background:var(--mar-claro)}
+@media (hover:hover) and (pointer:fine){.nav-larga a:hover{color:var(--texto)}}
+.topo .btn{min-height:44px;padding:10px 18px;font-size:.98rem}
+.menu{position:relative}
+.menu summary{list-style:none;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;background:var(--mar-claro);font-weight:700;cursor:pointer}
+.menu summary::-webkit-details-marker{display:none}
+.menu[open] summary{background:var(--agua);color:var(--tinta)}
+.menu ul{position:absolute;right:0;top:calc(100% + 8px);width:min(300px,calc(100vw - 32px));margin:0;padding:8px;list-style:none;background:var(--mar-fundo);border-radius:var(--raio);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.menu li a{display:flex;align-items:center;min-height:48px;padding:0 14px;border-radius:12px;text-decoration:none;font-weight:600}
+.menu li a[aria-current]{background:var(--mar-claro)}
+@media (min-width:1120px){.nav-larga{display:flex}.menu{display:none}}
+@media (max-width:420px){.marca span{display:none}}
+
+/* ---------- capa da home ---------- */
+.capa{display:grid;gap:0}
+.capa__texto{padding:28px var(--gutter) 44px;display:flex;flex-direction:column;gap:22px;justify-content:center}
+.capa__texto p.lead{font-size:1.15rem;color:var(--texto-suave);max-width:34ch}
+.capa__foto{position:relative;order:-1;height:38vh;min-height:240px;overflow:hidden}
+.capa__foto img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;position:absolute;inset:0}
+.nota{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:8px 16px 8px 10px;border-radius:999px;background:var(--mar-claro);font-weight:600;text-decoration:none;min-height:44px}
+.nota b{display:inline-grid;place-items:center;min-width:44px;height:30px;padding:0 10px;border-radius:999px;background:var(--sol);color:var(--tinta);font-weight:800}
+@media (min-width:900px){
+  .capa{grid-template-columns:1.05fr .95fr;min-height:calc(100vh - 72px)}
+  .capa__texto{padding:64px 56px 64px max(var(--gutter),calc((100vw - var(--max))/2 + var(--gutter)))}
+  .capa__foto{order:0;height:auto;min-height:0}
+}
+
+/* ---------- passeios (placas de embarque) ---------- */
+.secao{padding:clamp(64px,9vw,112px) 0}
+.secao__cab{display:flex;flex-direction:column;gap:12px;margin-bottom:36px;max-width:44rem}
+.secao__cab p{color:var(--texto-suave);font-size:1.1rem}
+.placas{display:grid;gap:20px}
+@media (min-width:760px){.placas{grid-template-columns:repeat(2,1fr);gap:24px}}
+.placa{display:flex;flex-direction:column;background:var(--mar-claro);border-radius:var(--raio);overflow:hidden;text-decoration:none;transition:transform .2s var(--ease-out)}
+.placa:active{transform:scale(.985)}
+@media (hover:hover) and (pointer:fine){.placa:hover{transform:translateY(-4px)}.placa:hover .placa__ir{background:var(--colete);color:var(--tinta)}}
+.placa__foto{aspect-ratio:16/10;overflow:hidden;background:var(--mar-fundo)}
+.placa__foto img{width:100%;height:100%;object-fit:cover}
+.placa__corpo{display:flex;flex-direction:column;gap:14px;padding:22px 22px 24px;flex:1}
+.placa__tipo{font-weight:700;color:var(--agua)}
+.placa__horas{display:flex;flex-wrap:wrap;gap:8px}
+.placa__horas span{padding:6px 12px;border-radius:999px;background:var(--mar);font-size:.95rem;font-weight:600}
+.placa__fim{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:6px}
+.preco{font:800 1.7rem/1 var(--titulo)}
+.preco small{font:600 .9rem/1 var(--corpo);color:var(--texto-suave);margin-left:6px}
+.placa__ir{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--mar);flex:none;transition:background-color .2s ease}
+.placa__ir svg{width:22px;height:22px}
+
+/* ---------- faixa da escuna (verde-água) ---------- */
+.faixa-agua{background:var(--agua);color:var(--tinta)}
+.faixa-madeira{background:var(--madeira);color:var(--casco)}
+.faixa-colete{background:var(--colete);color:var(--tinta)}
+.duas{display:grid;gap:32px;align-items:center}
+@media (min-width:900px){.duas{grid-template-columns:1fr 1fr;gap:56px}}
+.duas__texto{display:flex;flex-direction:column;gap:18px}
+.duas__texto p{font-size:1.1rem;max-width:40ch}
+.par{display:flex;gap:12px;align-items:flex-start}
+.par > *{flex:1 1 0;min-width:0}
+.par img{width:100%;border-radius:var(--raio)}
+.numeros{display:flex;flex-wrap:wrap;gap:28px 40px}
+.numeros div{display:flex;flex-direction:column}
+.numeros strong{font:800 clamp(2.8rem,6vw,4rem)/1 var(--titulo)}
+.numeros span{font-weight:600}
+
+/* ---------- avaliações ---------- */
+.avaliacoes .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+.grande-nota{display:flex;align-items:baseline;gap:16px}
+.grande-nota strong{font:900 clamp(5rem,14vw,8.5rem)/.85 var(--titulo)}
+.grande-nota span{font-size:1.2rem;font-weight:600;max-width:16ch}
+
+/* ---------- perguntas ---------- */
+.perguntas{display:grid;gap:12px;max-width:52rem}
+.perguntas details{background:var(--mar-claro);border-radius:14px}
+.perguntas summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;padding:14px 20px;font-weight:700;font-size:1.05rem;cursor:pointer;list-style:none}
+.perguntas summary::-webkit-details-marker{display:none}
+.perguntas summary::after{content:"+";font:800 1.6rem/1 var(--titulo);color:var(--agua);flex:none}
+.perguntas details[open] summary::after{content:"–"}
+.perguntas details p{padding:0 20px 20px;color:var(--texto-suave);max-width:60ch}
+.faixa-agua .perguntas details{background:rgba(7,42,53,.12)}
+.faixa-agua .perguntas details p{color:var(--tinta)}
+.faixa-agua .perguntas summary::after{color:var(--tinta)}
+
+/* ---------- contato ---------- */
+.contato{background:var(--mar-fundo)}
+.contato .duas__texto .btn{align-self:flex-start}
+.canais{display:grid;gap:12px}
+.canais a,.canais div{display:flex;flex-direction:column;gap:2px;padding:18px 20px;border-radius:14px;background:var(--mar-claro);text-decoration:none;min-height:44px}
+.canais b{font-weight:700}
+.canais span{color:var(--texto-suave)}
+
+/* ---------- página de passeio ---------- */
+.trilha-pao{padding-top:20px}
+.trilha-pao ol{display:flex;flex-wrap:wrap;gap:4px 0;margin:0;padding:0;list-style:none;font-size:.95rem;color:var(--texto-suave)}
+.trilha-pao li+li::before{content:"/";margin:0 10px;opacity:.6}
+.trilha-pao a{display:inline-flex;align-items:center;min-height:44px}
+.abre{padding:12px 0 56px}
+.abre .duas{align-items:end}
+.abre__texto{display:flex;flex-direction:column;gap:20px}
+.abre__texto .lead{font-size:1.15rem;color:var(--texto-suave);max-width:38ch}
+.fatos{display:flex;flex-wrap:wrap;gap:10px}
+.fatos span{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--mar-claro);font-weight:600}
+.fatos span b{color:var(--sol);font-weight:700}
+.abre__foto img{border-radius:var(--raio);width:100%;aspect-ratio:4/3;object-fit:cover}
+
+.paradas{display:grid;gap:clamp(40px,6vw,72px);counter-reset:parada}
+.parada{display:grid;gap:22px;align-items:center}
+@media (min-width:900px){.parada{grid-template-columns:1fr 1fr;gap:56px}.parada:nth-child(even) .parada__foto{order:2}}
+.parada__foto img,.parada__foto .vaga{border-radius:var(--raio);width:100%;aspect-ratio:3/2;object-fit:cover}
+.parada__texto{display:flex;flex-direction:column;gap:14px}
+.parada__hora{display:inline-flex;align-self:flex-start;align-items:center;gap:10px;font-weight:700;color:var(--agua)}
+.parada__hora::before{counter-increment:parada;content:counter(parada);display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--agua);color:var(--tinta);font:800 1.15rem/1 var(--titulo)}
+.parada__texto p{font-size:1.08rem;max-width:44ch}
+.lista{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.lista li{display:flex;gap:10px;align-items:baseline}
+.lista li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--sol);transform:translateY(-2px)}
+.faixa-agua .lista li::before,.faixa-colete .lista li::before{background:var(--tinta)}
+
+.valores{display:grid;gap:4px;margin:0;padding:0;list-style:none;max-width:34rem}
+.valores li{display:flex;align-items:baseline;gap:10px;padding:10px 0;font-size:1.08rem}
+.valores li::after{content:"";order:2;flex:1;border-bottom:2px dotted currentColor;opacity:.45;transform:translateY(-5px)}
+.valores li span{order:1}
+.valores li b{order:3;font:800 1.5rem/1 var(--titulo)}
+.aviso{font-weight:600}
+
+.barcos{display:grid;gap:16px}
+@media (min-width:760px){.barcos{grid-template-columns:repeat(3,1fr)}}
+.barco{display:flex;flex-direction:column;gap:12px;padding:0 0 20px;background:var(--mar-claro);border-radius:var(--raio);overflow:hidden}
+.barco > :not(.vaga){padding-inline:20px}
+.barco .vaga{border-radius:0;aspect-ratio:4/3}
+.barco h3{font-size:1.7rem}
+
+.galeria{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+.galeria img,.galeria .vaga{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px}
+.galeria .larga{grid-column:span 2}
+.galeria .larga img,.galeria .larga .vaga{aspect-ratio:16/9}
+@media (min-width:900px){.galeria{grid-template-columns:repeat(4,1fr)}.galeria .larga{grid-column:span 2}}
+
+.outros{display:grid;gap:12px}
+@media (min-width:760px){.outros{grid-template-columns:repeat(3,1fr)}}
+.outros a{display:flex;align-items:center;gap:14px;padding:12px;border-radius:var(--raio);background:var(--mar-claro);text-decoration:none;min-height:44px;transition:transform .2s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.outros a:hover{transform:translateY(-3px)}}
+.outros img{width:84px;height:84px;border-radius:12px;object-fit:cover;flex:none}
+.outros b{display:block;font:800 1.35rem/1.05 var(--titulo)}
+.outros span{color:var(--texto-suave);font-size:.95rem}
+
+.chamada{text-align:left}
+.chamada .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+.chamada h2{max-width:18ch}
+
+/* ---------- vaga de foto (foto que falta) ---------- */
+.vaga{display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:18px;border-radius:var(--raio);background:repeating-linear-gradient(135deg,var(--mar-fundo) 0 14px,#0A3542 14px 28px);color:var(--texto);aspect-ratio:3/2;border:3px dashed var(--sol)}
+.vaga svg{width:36px;height:36px;color:var(--sol);margin-bottom:auto}
+.vaga b{font-weight:700;font-size:1rem;line-height:1.3}
+.vaga span{font-size:.88rem;color:var(--texto-suave);line-height:1.35}
+
+/* ---------- rodapé ---------- */
+.rodape{background:var(--mar-fundo);padding:56px 0 110px;color:var(--texto-suave)}
+.rodape .wrap{display:grid;gap:32px}
+@media (min-width:860px){.rodape .wrap{grid-template-columns:1.2fr 1fr 1fr}}
+.rodape b{display:block;color:var(--texto);font:800 1.4rem/1 var(--titulo);margin-bottom:12px;text-transform:uppercase}
+.rodape nav{display:flex;flex-direction:column}
+.rodape nav a,.rodape p a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
+@media (hover:hover) and (pointer:fine){.rodape a:hover{color:var(--texto)}}
+
+/* ---------- WhatsApp flutuante ---------- */
+.wa-fixo{position:fixed;right:16px;bottom:16px;z-index:30;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;background:#25D366;color:#062B16;font-weight:700;text-decoration:none;box-shadow:0 10px 28px rgba(0,0,0,.35);transition:transform .16s var(--ease-out)}
+.wa-fixo svg{width:26px;height:26px}
+.wa-fixo:active{transform:scale(.96)}
+@media (max-width:420px){.wa-fixo span{display:none}.wa-fixo{padding:0;width:58px;justify-content:center}}
+
+/* ---------- créditos ---------- */
+.creditos li{padding:10px 0;color:var(--texto-suave)}
+.creditos a{color:var(--texto)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* paradas sobre a faixa verde-água: texto e número em par com o fundo (memória "cor nunca sozinha") */
+.faixa-agua .parada__hora{color:var(--tinta)}
+.faixa-agua .parada__hora::before{background:var(--tinta);color:var(--agua)}
+.faixa-agua .secao__cab p{color:var(--tinta)}
+
+/* vídeo de exemplo no topo + tarja (pedido do João, 03/11: trocar pelo vídeo da agência) */
+.capa__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 50%}
+.tarja{position:absolute;left:12px;top:12px;right:12px;width:max-content;max-width:calc(100% - 24px);padding:8px 14px;border-radius:10px;background:var(--sol);color:var(--tinta);font-weight:700;font-size:.9rem;line-height:1.3;border:2px dashed var(--tinta)}
+
+/* topo com o vídeo cobrindo a tela inteira (pedido do João, 03/11). Texto sobre o vídeo:
+   escurecido medido em px a partir de baixo no celular e da esquerda no computador
+   (memória "contraste sobre foto em várias telas") */
+.capa{position:relative;display:flex;align-items:flex-end;min-height:calc(100svh - 72px);overflow:hidden;grid-template-columns:none}
+.capa__foto{position:absolute;inset:0;order:0;height:auto;min-height:0;max-height:none}
+.capa__foto::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,42,53,.95) 0,rgba(7,42,53,.85) 300px,rgba(7,42,53,.35) 520px,rgba(7,42,53,.1) 100%)}
+.capa__video{object-position:62% 50%}
+.capa__texto{position:relative;z-index:1;padding:32px var(--gutter) 40px;max-width:720px}
+.capa__texto p.lead{color:var(--texto)}
+.capa .tarja{left:auto;right:12px;top:12px;z-index:2}
+@media (min-width:900px){
+  .capa{min-height:calc(100vh - 72px)}
+  .capa__foto::after{background:linear-gradient(90deg,rgba(7,42,53,.92) 0,rgba(7,42,53,.78) 520px,rgba(7,42,53,.25) 860px,rgba(7,42,53,0) 100%),linear-gradient(to top,rgba(7,42,53,.6) 0,rgba(7,42,53,0) 260px)}
+  .capa__texto{padding:64px max(var(--gutter),calc((100vw - var(--max))/2 + var(--gutter))) 72px}
+}
+@media (min-width:900px){
+  .capa__texto{width:100%;max-width:none;padding:64px var(--gutter) 72px max(var(--gutter),calc((100vw - var(--max))/2 + var(--gutter)))}
+  .capa__texto > *{max-width:640px}
+  .capa__texto .btn,.capa__texto .nota{max-width:none}
+}
+.capa__texto .btn{align-self:flex-start}
+
+/* ---- correções da auditoria de 03/11 ---- */
+/* contraste: verde-água como texto sobre o mar usa o tom claro; texto suave sobre a madeira vira branco */
+.placa__tipo{color:var(--agua-clara)}
+.faixa-madeira .secao__cab p,.faixa-madeira .duas__texto p{color:var(--casco)}
+/* toque mínimo de 44 px (regra 4) */
+.trilha-pao a{min-width:44px;padding-inline:4px;justify-content:center}
+.creditos a{display:inline-flex;align-items:center;min-height:44px}
+/* botão de pausa do vídeo */
+.video-pausa{position:absolute;left:12px;top:12px;z-index:2;display:inline-grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:rgba(7,42,53,.72);color:var(--casco);cursor:pointer;transition:transform .16s var(--ease-out),background-color .2s ease}
+.video-pausa svg{width:20px;height:20px}
+.video-pausa:active{transform:scale(.94)}
+.video-pausa .i-tocar,.video-pausa[data-parado="true"] .i-pausa{display:none}
+.video-pausa[data-parado="true"] .i-tocar{display:block}
+@media (hover:hover) and (pointer:fine){.video-pausa:hover{background:rgba(7,42,53,.92)}}
+@media (max-width:899px){.capa .tarja{top:64px;left:12px;right:auto}}
+
+/* ---- 03/11, segunda rodada ---- */
+/* topo: foto da escuna cobrindo tudo. No celular o texto fica em cima, no céu, e o barco aparece embaixo */
+.capa__foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+@media (max-width:899px){
+  .capa{align-items:flex-start}
+  .capa__foto::after{background:linear-gradient(to bottom,rgba(7,42,53,.9) 0,rgba(7,42,53,.7) 260px,rgba(7,42,53,0) 420px)}
+  .capa__texto{padding-top:24px}
+  .capa__texto p.lead{display:none}
+  .capa__foto img{object-position:50% 100%}
+}
+/* avaliações em texto */
+.avaliacoes .wrap{flex-direction:column;align-items:stretch}
+.depoimentos{display:grid;gap:16px}
+@media (min-width:860px){.depoimentos{grid-template-columns:1fr 1fr;gap:24px}}
+.depoimentos figure,.depoimento-solo{margin:0;padding:24px;border-radius:var(--raio);background:var(--mar-claro);display:flex;flex-direction:column;gap:14px}
+.depoimentos blockquote,.depoimento-solo blockquote{margin:0;font-size:1.08rem;line-height:1.55}
+.depoimentos figcaption,.depoimento-solo figcaption{font-weight:700;color:var(--agua-clara)}
+.depoimento-solo{margin-top:8px}
+.avaliacoes .grande-nota{margin-top:16px}
+.foto-redonda{border-radius:var(--raio);width:100%;aspect-ratio:4/3;object-fit:cover}
+/* computador: barco na parte de cima, texto embaixo sobre a água vazia (sem escurecer o barco pela esquerda) */
+@media (min-width:900px){
+  .capa__foto img{object-position:50% 76%}
+  .capa__foto::after{background:linear-gradient(to top,rgba(7,42,53,.92) 0,rgba(7,42,53,.7) 300px,rgba(7,42,53,0) 560px)}
+  .capa__texto > h1{max-width:960px}
+}
