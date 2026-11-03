@@ -306,3 +306,8 @@ p{margin:0}
   .capa__foto::after{background:linear-gradient(to top,rgba(7,42,53,.92) 0,rgba(7,42,53,.7) 300px,rgba(7,42,53,0) 560px)}
   .capa__texto > h1{max-width:960px}
 }
+
+/* 03/11: topo com a Ilha Anchieta aérea (3840 px, não amplia). A ilha fica no meio da foto,
+   então no computador mostramos a parte de baixo e ela sobe para cima do texto */
+.capa__foto img{object-position:50% 100%}
+@media (max-width:899px){.capa__foto img{object-position:42% 70%}}
